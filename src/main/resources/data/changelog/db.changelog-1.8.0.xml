@@ -8,7 +8,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
   <changeSet id="9" author="mwarman">
-    <createTable tableName="ScheduledTask">
+    <createTable tableName="ScheduledTaskEntity">
       <column name="id" type="bigint(20)" autoIncrement="true">
         <constraints primaryKey="true" nullable="false" />
       </column>

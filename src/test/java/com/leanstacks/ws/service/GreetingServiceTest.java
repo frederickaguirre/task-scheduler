@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import com.leanstacks.ws.domain.service.GreetingService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.leanstacks.ws.AbstractTest;
 import com.leanstacks.ws.BasicTransactionalTest;
-import com.leanstacks.ws.model.Greeting;
+import com.leanstacks.ws.domain.model.Greeting;
 
 /**
  * Unit test methods for the GreetingService and GreetingServiceBean.

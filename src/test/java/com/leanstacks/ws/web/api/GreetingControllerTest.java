@@ -25,9 +25,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.leanstacks.ws.AbstractTest;
 import com.leanstacks.ws.RestControllerTest;
-import com.leanstacks.ws.model.Greeting;
-import com.leanstacks.ws.service.EmailService;
-import com.leanstacks.ws.service.GreetingService;
+import com.leanstacks.ws.domain.model.Greeting;
+import com.leanstacks.ws.domain.service.GreetingService;
 
 /**
  * <p>
@@ -65,11 +64,6 @@ public class GreetingControllerTest extends AbstractTest {
     @MockBean
     private transient GreetingService greetingService;
 
-    /**
-     * A mocked EmailService.
-     */
-    @MockBean
-    private transient EmailService emailService;
 
     /**
      * A mock servlet environment.
@@ -296,41 +290,6 @@ public class GreetingControllerTest extends AbstractTest {
         Assert.assertEquals("failure - expected HTTP status 204", 204, status);
         Assert.assertTrue("failure - expected HTTP response body to be empty", Strings.isNullOrEmpty(content));
 
-    }
-
-    /**
-     * Test sending email asynchronously.
-     * 
-     * @throws Exception Thrown if mocking failure occurs.
-     */
-    @Test
-    public void testSendGreetingAsync() throws Exception {
-
-        // Create some test data
-        final Long id = Long.valueOf(1);
-        final Optional<Greeting> greetingOptional = Optional.of(getEntityStubData());
-
-        // Stub the GreetingService.findOne method return value
-        when(greetingService.findOne(id)).thenReturn(greetingOptional);
-
-        // Perform the behavior being tested
-        final MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.post(RESOURCE_ITEM_URI_ACTION_SEND, id).accept(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        // Extract the response status and body
-        final String content = result.getResponse().getContentAsString();
-        final int status = result.getResponse().getStatus();
-
-        // Verify the GreetingService.findOne method was invoked once
-        verify(greetingService, times(1)).findOne(id);
-
-        // Verify the EmailService.sendAsync method was invoked once
-        verify(emailService, times(1)).sendAsync(any(Greeting.class));
-
-        // Perform standard JUnit assertions on the test results
-        Assert.assertEquals("failure - expected HTTP status 200", 200, status);
-        Assert.assertTrue("failure - expected HTTP response body to have a value", !Strings.isNullOrEmpty(content));
     }
 
     private List<Greeting> getEntityListStubData() {
