@@ -6,7 +6,9 @@ import com.leanstacks.ws.infraestructure.converters.ScheduledTaskDTOConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -33,6 +35,7 @@ public class ScheduledTaskController {
 
     }
 
+    @CrossOrigin(origins = "*", methods = RequestMethod.POST)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ScheduledTaskDTO createScheduledTask(@RequestBody final ScheduledTaskDTO dto) {
@@ -45,6 +48,14 @@ public class ScheduledTaskController {
     public void deleteScheduledTask(@PathVariable("id") final Long id) {
         logger.info("> delete ScheduledTasks");
         scheduledTaskService.delete(id);
+    }
+
+    @CrossOrigin(origins = "*", methods = RequestMethod.OPTIONS)
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> preflight() {
+        return ResponseEntity.ok()
+                .allow(HttpMethod.GET, HttpMethod.POST) // Los métodos que deseas permitir
+                .build();
     }
 
 }

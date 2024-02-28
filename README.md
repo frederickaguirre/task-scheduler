@@ -1,3 +1,10 @@
+# Task Scheduler
+
+Project to RA, expose an API for the creation of Tasks which consist of pinging a website and executing it according to the cron schedule.
+
+The project below was used as a base, and it was modified to adapt it to clean Architecture.
+
+
 # Project Skeleton for Spring Boot Web Services
 
 ## Acknowledgements
