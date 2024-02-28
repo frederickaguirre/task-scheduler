@@ -7,12 +7,17 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-  <!-- 
-    Include one changelog file for each release
-    that contains database changes.
-    See: liquibase.org/bestpractices.html
-   -->
-  <include file="data/changelog/db.changelog-1.7.0.xml" />
-  <include file="data/changelog/db.changelog-1.8.0.xml" />
-
+  <changeSet id="9" author="mwarman">
+    <createTable tableName="ScheduledTask">
+      <column name="id" type="bigint(20)" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="url" type="varchar(100)">
+        <constraints nullable="false" />
+      </column>
+      <column name="cronSyntax" type="varchar(100)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
 </databaseChangeLog>

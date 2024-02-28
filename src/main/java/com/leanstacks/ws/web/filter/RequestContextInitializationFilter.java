@@ -22,16 +22,16 @@ import com.leanstacks.ws.util.RequestContext;
  * 
  * @author Matt Warman
  */
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
-public class RequestContextInitializationFilter extends GenericFilterBean {
+//@Component
+//@Order(Ordered.HIGHEST_PRECEDENCE)
+public class RequestContextInitializationFilter {//extends GenericFilterBean {
 
     /**
      * The Logger for this class.
      */
     private static final Logger logger = LoggerFactory.getLogger(RequestContextInitializationFilter.class);
 
-    @Override
+    //@Override
     public void doFilter(final ServletRequest req, final ServletResponse resp, final FilterChain chain)
             throws IOException, ServletException {
         logger.info("> doFilter");
